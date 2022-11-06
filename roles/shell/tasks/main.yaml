@@ -1,0 +1,5 @@
+- name: Setup Shell For Ubuntu Jammy
+  include_tasks: "ubuntu-jammy.yaml"
+  when: 
+    - hostvars[inventory_hostname].ansible_distribution == "Ubuntu"
+    - hostvars[inventory_hostname].ansible_distribution_version == "22.04"

@@ -1,0 +1,33 @@
+- name: Install Fish Shell
+  become: true
+  apt:
+    pkg:
+      - fish
+
+- name: Set Fish Shell as Default for User
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/fish
+
+- name: Install Config Dependencies
+  become: true
+  apt:
+    pkg:
+      - bat
+      - exa
+
+- name: Template Fish Config
+  template:
+    src: config.fish.j2
+    dest: ~/.config/fish/config.fish
+
+- name: Template Fish Aliases
+  template:
+    src: aliases.fish.j2
+    dest: ~/.config/fish/aliases.fish
+
+- name: Tempalte Fish Functions
+  template:
+    src: functions.fish.j2
+    dest: ~/.config/fish/functions.fish

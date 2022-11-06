@@ -1,0 +1,22 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Configure Linux CLI
+  hosts: localhost
+  pre_tasks:
+    - name: Update Packages
+      become: true
+      apt:
+        update_cache: true
+        upgrade: true
+    - name: Debug OS Distribution
+      debug:
+        var: hostvars[inventory_hostname].ansible_distribution
+        verbosity: 1
+    - name: Debug OS Distribution Version
+      debug:
+        var: hostvars[inventory_hostname].ansible_distribution_version
+        verbosity: 1
+  roles:
+    - shell
+    - prompt
+    - programming

@@ -1,0 +1,20 @@
+## Disable default fish greeting
+set fish_greeting
+set VIRTUAL_ENV_DISABLE_PROMPT "1"
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+
+fish_add_path /usr/local/go/bin
+fish_add_path $HOME/.local/bin
+
+## Starship prompt
+if status --is-interactive
+   starship init fish | source
+end
+
+if test -f ~/.config/fish/aliases.fish
+        source ~/.config/fish/aliases.fish
+end
+
+if test -f ~/.config/fish/functions.fish
+        source ~/.config/fish/functions.fish
+end
