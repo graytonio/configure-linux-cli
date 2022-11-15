@@ -1,0 +1,11 @@
+- name: Install Python3
+  ansible.builtin.homebrew:
+    name: python
+
+- name: Install NodeJS
+  ansible.builtin.homebrew:
+    name: node
+
+- name: Install Go
+  ansible.builtin.homebrew:
+    name: go

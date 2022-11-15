@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Get Distribution Info for Debug and Dev
+  hosts: localhost
+  tasks:
+    - name: Distribution
+      ansible.builtin.debug:
+        var: hostvars[inventory_hostname].ansible_distribution
+    - name: Version
+      ansible.builtin.debug:
+        var: hostvars[inventory_hostname].ansible_distribution_version
+    - name: Release
+      ansible.builtin.debug:
+        var: hostvars[inventory_hostname].ansible_distribution_release

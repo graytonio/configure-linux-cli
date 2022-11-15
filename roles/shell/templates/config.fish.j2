@@ -6,15 +6,20 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 fish_add_path /usr/local/go/bin
 fish_add_path $HOME/.local/bin
 
+{% if hostvars[inventory_hostname].ansible_distribution == "MacOSX" %}
+        fish_add_path /opt/homebrew/bin
+        fish_add_path $HOME/Library/Python/3.9/bin
+{% endif %}
+
 ## Starship prompt
 if status --is-interactive
    starship init fish | source
 end
 
-if test -f ~/.config/fish/aliases.fish
-        source ~/.config/fish/aliases.fish
+if test -f $HOME/.config/fish/aliases.fish
+        source $HOME/.config/fish/aliases.fish
 end
 
-if test -f ~/.config/fish/functions.fish
-        source ~/.config/fish/functions.fish
+if test -f $HOME/.config/fish/functions.fish
+        source $HOME/.config/fish/functions.fish
 end

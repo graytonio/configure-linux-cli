@@ -22,3 +22,10 @@ alias ......='cd ../../../../..'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias kc="kubectl"
+alias wkc="watch kubectl"
+
+{% if hostvars[inventory_hostname].ansible_distribution == "MacOSX" %}
+# MacOSX Specific Aliases
+alias brewup="brew update && brew upgrade"
+{% endif %}

@@ -1,0 +1,47 @@
+- name: Check if homebrew is installed
+  ansible.builtin.command: command -v brew
+  ignore_errors: true
+  register: homebrew_installed
+
+- name: Install Homebrew
+  when: homebrew_installed.stdout == ""
+  block:
+    - name: Download Install Script
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        dest: /tmp/install-brew
+    - name: Run Install Script
+      ansible.builtin.shell: bash /tmp/install-brew < /dev/null
+  
+- name: Install Fish Shell
+  ansible.builtin.homebrew:
+    name: fish
+    state: present
+
+- name: Set Fish Shell as Default for User
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /opt/homebrew/bin/fish
+  
+- name: Install Config Dependencies
+  ansible.builtin.homebrew:
+    name:
+      - exa
+      - bat
+
+- name: Template Fish Config
+  ansible.builtin.template:
+    src: config.fish.j2
+    dest: ~/.config/fish/config.fish
+
+- name: Template Fish Aliases
+  ansible.builtin.template:
+    src: aliases.fish.j2
+    dest: ~/.config/fish/aliases.fish
+
+- name: Template Fish Functions
+  ansible.builtin.template:
+    src: functions.fish.j2
+    dest: ~/.config/fish/functions.fish
+    

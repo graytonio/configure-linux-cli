@@ -21,3 +21,9 @@ function fish_user_key_bindings
   bind ! bind_bang
   bind '$' bind_dollar
 end
+
+{% if hostvars[inventory_hostname].ansible_distribution == "MacOSX" %}
+function brewlist -a tap
+  brew tap-info $tap --json | jq '.[0].formula_names[]'
+end
+{% endif %}
