@@ -1,0 +1,28 @@
+
+- name: Install Ubuntu Dependencies
+  become: true
+  when: hostvars[inventory_hostname].ansible_distribution == "Ubuntu"
+  ansible.builtin.apt:
+    pkg:
+      - unzip
+
+- name: Install Hack Nerd Font
+  block:
+    - name: Download Hack Nerd Font
+      get_url:
+        url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
+        dest: /tmp/hack-font.zip
+    - name: Ensure Font Directory Exists
+      file:
+        path: "{{ font_dir }}"
+        state: directory
+    - name: Unpack Hack Font
+      unarchive:
+        src: /tmp/hack-font.zip
+        dest: "{{ font_dir }}"
+        remote_src: yes
+
+- name: Reload Font Cache
+  when:
+    - hostvars[inventory_hostname].ansible_distribution == "Ubuntu"
+  shell: fc-cache -fv

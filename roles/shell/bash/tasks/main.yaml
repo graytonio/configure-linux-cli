@@ -1,0 +1,20 @@
+- name: Ensure Modern Bash Shell for MacOS
+  when: hostvars[inventory_hostname].ansible_distribution == "MacOSX"
+  ansible.builtin.homebrew:
+    name: bash
+    state: present
+
+- name: Template Bashrc
+  ansible.builtin.template:
+    src: bash/bashrc.j2
+    dest: ~/.bashrc
+
+- name: Template Bash Aliases
+  ansible.builtin.template:
+    src: bash/bash_aliases.j2
+    dest: ~/.bash_aliases
+
+- name: Template Bash Functions
+  ansible.builtin.template:
+    src: bash/bash_functions.j2
+    dest: ~/.bash_functions

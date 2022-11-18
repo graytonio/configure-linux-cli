@@ -1,0 +1,4 @@
+font_dirs:
+  MacOSX: ~/Library/Fonts
+  Ubuntu: ~/.fonts
+font_dir: "{{ font_dirs[hostvars[inventory_hostname].ansible_distribution] | default('') }}"

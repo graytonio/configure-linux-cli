@@ -1,11 +1,7 @@
-- name: Setup Prompt For Ubuntu Jammy
-  include_tasks: "ubuntu-jammy.yaml"
-  when: 
-    - hostvars[inventory_hostname].ansible_distribution == "Ubuntu"
-    - hostvars[inventory_hostname].ansible_distribution_version == "22.04"
+- name: Install Fonts
+  ansible.builtin.import_role:
+    name: prompt/fonts
 
-- name: Setup Shell For MacOSX 13
-  include_tasks: "macos-13.yaml"
-  when:
-    - hostvars[inventory_hostname].ansible_distribution == "MacOSX"
-    - hostvars[inventory_hostname].ansible_distribution_version == "13.0"
+- name: Setup Starship Prompt
+  ansible.builtin.import_role:
+    name: prompt/starship

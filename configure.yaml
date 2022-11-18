@@ -3,14 +3,6 @@
 - name: Configure Linux CLI
   hosts: localhost
   pre_tasks:
-    - name: Update Packages
-      become: true
-      apt:
-        update_cache: true
-        upgrade: true
-      when:
-        - hostvars[inventory_hostname].ansible_distribution == "Ubuntu"
-        - hostvars[inventory_hostname].ansible_distribution_version == "22.04"
     - name: Debug OS Distribution
       debug:
         var: hostvars[inventory_hostname].ansible_distribution

@@ -1,0 +1,5 @@
+{% if hostvars[inventory_hostname].ansible_distribution == "MacOSX" %}
+brewlist () {
+  brew tap-info ${1} --json | jq '.[0].formula_names[]'
+}
+{% endif %}

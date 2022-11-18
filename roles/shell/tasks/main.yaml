@@ -9,3 +9,7 @@
   when:
     - hostvars[inventory_hostname].ansible_distribution == "MacOSX"
     - hostvars[inventory_hostname].ansible_distribution_version == "13.0"
+
+- name: Setup Bash
+  ansible.builtin.import_role:
+    name: shell/bash

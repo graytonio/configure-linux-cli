@@ -7,8 +7,8 @@ fish_add_path /usr/local/go/bin
 fish_add_path $HOME/.local/bin
 
 {% if hostvars[inventory_hostname].ansible_distribution == "MacOSX" %}
-        fish_add_path /opt/homebrew/bin
-        fish_add_path $HOME/Library/Python/3.9/bin
+fish_add_path /opt/homebrew/bin
+fish_add_path $HOME/Library/Python/3.9/bin
 {% endif %}
 
 ## Starship prompt
