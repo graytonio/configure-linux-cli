@@ -1,0 +1,5 @@
+- name: Ensure Modern Bash Shell for MacOS
+  when: hostvars[inventory_hostname].ansible_distribution == "MacOSX"
+  ansible.builtin.homebrew:
+    name: bash
+    state: present

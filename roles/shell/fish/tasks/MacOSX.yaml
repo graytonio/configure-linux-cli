@@ -1,0 +1,26 @@
+- name: Check if homebrew is installed
+  ansible.builtin.command: command -v brew
+  ignore_errors: true
+  register: homebrew_installed
+
+- name: Install Homebrew
+  when: homebrew_installed.stdout == ""
+  block:
+    - name: Download Install Script
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        dest: /tmp/install-brew
+    - name: Run Install Script
+      ansible.builtin.shell: bash /tmp/install-brew < /dev/null
+
+- name: Install Fish MacOSX
+  when: hostvars[inventory_hostname].ansible_distribution == "MacOSX"
+  community.general.homebrew:
+    name: fish
+    state: present
+
+- name: Install Config Dependencies MacOSX
+  when: hostvars[inventory_hostname].ansible_distribution == "MacOSX"
+  community.general.homebrew:
+    name: exa
+    state: present

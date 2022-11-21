@@ -1,11 +1,11 @@
-- name: Install Fish Shell
+- name: Install Fish
   become: true
-  apt:
+  ansible.builtin.apt:
     pkg:
       - fish
 
 - name: Install Config Dependencies
   become: true
-  apt:
+  ansible.builtin.apt:
     pkg:
       - exa

@@ -1,14 +1,6 @@
-- name: Setup Shell For Ubuntu Jammy
-  include_tasks: "ubuntu-jammy.yaml"
-  when: 
-    - hostvars[inventory_hostname].ansible_distribution == "Ubuntu"
-    - hostvars[inventory_hostname].ansible_distribution_version == "22.04"
-
-- name: Setup Shell For MacOSX 13
-  include_tasks: "macos-13.yaml"
-  when:
-    - hostvars[inventory_hostname].ansible_distribution == "MacOSX"
-    - hostvars[inventory_hostname].ansible_distribution_version == "13.0"
+- name: Setup Fish
+  ansible.builtin.import_role:
+    name: shell/fish
 
 - name: Setup Bash
   ansible.builtin.import_role:

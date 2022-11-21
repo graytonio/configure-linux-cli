@@ -4,11 +4,11 @@
   hosts: localhost
   pre_tasks:
     - name: Debug OS Distribution
-      debug:
+      ansible.builtin.debug:
         var: hostvars[inventory_hostname].ansible_distribution
         verbosity: 1
     - name: Debug OS Distribution Version
-      debug:
+      ansible.builtin.debug:
         var: hostvars[inventory_hostname].ansible_distribution_version
         verbosity: 1
   roles:

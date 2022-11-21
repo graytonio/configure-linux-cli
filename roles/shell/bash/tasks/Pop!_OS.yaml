@@ -1,0 +1,3 @@
+- name: Nothing to Do
+  ansible.builtin.debug:
+    msg: Nothing to Do

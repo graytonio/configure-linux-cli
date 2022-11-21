@@ -3,13 +3,13 @@
     alias {{alias}}='{{command}}'
 {% endfor %}
 
-# Bash specific aliases
-{% for alias, command in (bash_aliases | default({}, true)).items() -%}
+# Fish specific aliases
+{% for alias, command in (fish_aliases | default({}, true)).items() -%}
     alias {{alias}}='{{command}}'
 {% endfor %}
 
-# Custom Bash Aliases
-{% for alias, command in (bash_aliases_custom | default({}, true)).items() -%}
+# Custom Fish Aliases
+{% for alias, command in (fish_aliases_custom | default({}, true)).items() -%}
 alias {{alias}}='{{ command }}'
 {% endfor %}
 
