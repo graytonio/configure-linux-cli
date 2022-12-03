@@ -15,7 +15,7 @@
     - name: Run Starship Install Script
       shell: "sh /tmp/starship-install.sh -y"
 
-- name: Tempalte Starship Config
+- name: Template Starship Config
   template:
     src: starship.toml.j2
     dest: ~/.config/starship.toml
