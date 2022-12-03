@@ -1,0 +1,5 @@
+fish_locations:
+  MacOSX: /opt/homebrew/bin
+  Ubuntu: /usr/bin
+  Pop!_OS: /usr/bin
+fish_location: "{{ fish_locations[hostvars[inventory_hostname].ansible_distribution] | default('') }}/fish"

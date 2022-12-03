@@ -1,5 +1,7 @@
 - name: Check if starship is installed
-  ansible.builtin.command: command -v starship
+  ansible.builtin.command: which starship
+  environment: 
+    PATH: "{{ ansible_env.PATH }}"
   register: starship_installed
 
 - name: Install Starship Prompt
