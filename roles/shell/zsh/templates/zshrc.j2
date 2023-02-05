@@ -20,7 +20,7 @@ include $HOME/.bash_functions
 
 # Include custom bash files
 mkdir -p $HOME/.bash_conf
-for f in $HOME/.bash_conf/bash_*; do include $f; done
+for f in $HOME/.bash_conf/bash_*(N); do include $f; done
 
 plugins=({{ zsh_plugins | map(attribute='name') | join(' ') }})
 

@@ -12,10 +12,11 @@
       - nodejs
       - npm
 
-- name: Check for current GO Install
-  shell: fish -c "go version"
-  register: go_check
-  ignore_errors: true
+- name: Remove any existing go install
+  become: true
+  file: 
+    path: /usr/local/go
+    state: absent
 
 # TODO Detect architecture
 - name: Install GOLANG
@@ -34,5 +35,3 @@
         src: "/tmp/go.tar.gz"
         dest: /usr/local
         remote_src: true
-  when:
-    - go_version not in go_check.stdout

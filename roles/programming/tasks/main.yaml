@@ -1,9 +1,2 @@
-- name: Setup Programming Tools For Ubuntu Jammy
-  include_tasks: "ubuntu-jammy.yaml"
-  when: 
-    - hostvars[inventory_hostname].ansible_distribution == "Ubuntu" or hostvars[inventory_hostname].ansible_distribution == "Pop!_OS"
-
-- name: Setup Shell For MacOSX 13
-  include_tasks: "macos-13.yaml"
-  when:
-    - hostvars[inventory_hostname].ansible_distribution == "MacOSX"
+- name: OS Specific Tasks
+  ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"

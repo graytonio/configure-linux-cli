@@ -2,19 +2,20 @@
   ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"
 
 - name: Check if OhMyZSH is already installed
-  ansible.builtin.set_fact:
-    zsh_installed: "{{ lookup('ansible.builtin.env', 'ZSH') is defined }}"
+  ansible.builtin.stat:
+    path: "{{ [ lookup('ansible.builtin.env', 'HOME'), '.oh-my-zsh' ] | path_join }}"
+  register: zsh_installed
 
 - name: Download OhMyZSH Install Script
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: /tmp/ohmyzsh-install.sh
     mode: '0755'
-  when: zsh_installed == False
+  when: not zsh_installed.stat.exists
 
 - name: Execute OhMyZSH Install Script
   ansible.builtin.shell: /tmp/ohmyzsh-install.sh --unattended --skip-chsh
-  when: zsh_installed == False
+  when: not zsh_installed.stat.exists
 
 - name: Install Any Missing ZSH Plugins
   ansible.builtin.git:

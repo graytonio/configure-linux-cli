@@ -18,4 +18,5 @@ include $HOME/.bash_functions
 
 # Include custom bash files
 mkdir -p $HOME/.bash_conf
+shopt -s nullglob
 for f in $HOME/.bash_conf/bash_*; do include $f; done
