@@ -1,3 +1,14 @@
+# General Shell Config
+
+shell_paths:
+  - /usr/local/go/bin
+  - /opt/homebrew/bin
+  - $HOME/.local/bin
+  - $HOME/Library/Python/3.9/bin
+  - $HOME/Library/Python/3.8/bin
+  - $HOME/.krew/bin
+  - $HOME/Library
+
 shell_aliases:
   ls: exa -al --color=always --group-directories-first --icons
   la: exa -a --color=always --group-directories-first --icons
@@ -15,9 +26,42 @@ shell_aliases:
   egrep: egrep --color=auto
   kc: kubectl
   wkc: watch kubectl
+  kcfc: kubectl delete pods --grace-period=0 --force
 
+# Bash Specific Config
 bash_aliases:
   bashup: source $HOME/.bashrc
 
+bash_locations:
+  MacOSX: /opt/homebrew/bin
+  Ubuntu: /bin
+  Pop!_OS: /bin
+bash_location: "{{ bash_locations[hostvars[inventory_hostname].ansible_distribution] | default('') }}/bash"
+
+# ZSH Specific Config
+zsh_plugins:
+  - name: aliases
+  - name: jfrog
+  - name: kubectl
+  - name: tmux
+  - name: vscode
+  - name: zsh-autosuggestions
+    url: https://github.com/zsh-users/zsh-autosuggestions
+
+zsh_locations:
+  MacOSX: /bin
+  Ubuntu: /usr/bin
+  Pop!_OS: /usr/bin
+zsh_location: "{{ zsh_locations[hostvars[inventory_hostname].ansible_distribution] | default('') }}/zsh"
+
+# Fish Specific Config
+fish_plugins:
+
 fish_aliases:
   fishup: source $HOME/.config/fish/config.fish
+
+fish_locations:
+  MacOSX: /opt/homebrew/bin
+  Ubuntu: /usr/bin
+  Pop!_OS: /usr/bin
+fish_location: "{{ fish_locations[hostvars[inventory_hostname].ansible_distribution] | default('') }}/fish"

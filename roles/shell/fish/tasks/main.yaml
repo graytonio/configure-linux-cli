@@ -1,12 +1,6 @@
 - name: OS Specific Tasks
   ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"
 
-- name: Set Fish Shell as Default for User
-  become: true
-  ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
-    shell: "{{ fish_location }}"
-
 - name: Template Fish Config
   ansible.builtin.template:
     src: config.fish.j2

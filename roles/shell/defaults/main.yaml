@@ -1,7 +1,11 @@
-bashrc_custom:
-bash_aliases_custom:
-bash_functions_custom:
+shell_paths_custom: {}
+shell_aliases_custom: {}
+default_shell: fish
 
-fish_config_custom:
-fish_aliases_custom:
-fish_functions_custom:
+bashrc_custom: {}
+bash_aliases_custom: {}
+bash_functions_custom: {}
+
+fish_config_custom: {}
+fish_aliases_custom: {}
+fish_functions_custom: {}

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# TODO Create robust install script
+
+DEPENDENCY_LIST="curl python3 python3-pip"
+
 check_dependencies() {
     if ! [ -x "$(command -v python3)" ] 
     then
@@ -20,5 +24,36 @@ check_dependencies() {
     fi
 }
 
-check_dependencies
-ansible-playbook --ask-become ./configure.yaml
+# Dependency Installation Functions
+install_dependencies_debian() {
+    apt update && apt install -y $DEPENDENCY_LIST
+}
+
+install_dependencies_Ubuntu() {
+    install_dependencies_debian
+}
+
+detect_os_versions() {
+    if [ -f /etc/os-release ]; then
+        # freedesktop.org and systemd
+        . /etc/os-release
+        OS=$NAME
+        VER=$VERSION_ID
+    elif type lsb_release >/dev/null 2>&1; then
+        # linuxbase.org
+        OS=$(lsb_release -si)
+        VER=$(lsb_release -sr)
+    elif [ -f /etc/lsb-release ]; then
+        # For some versions of Debian/Ubuntu without lsb_release command
+        . /etc/lsb-release
+        OS=$DISTRIB_ID
+        VER=$DISTRIB_RELEASE
+    fi
+}
+
+detect_os_versions
+install_dependencies_$OS
+
+echo $OS
+echo $VER
+# install_dependencies_debian

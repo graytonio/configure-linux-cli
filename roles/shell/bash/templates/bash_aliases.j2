@@ -1,11 +1,15 @@
 # Aliases in all shells
 {% for alias, command in (shell_aliases | default({}, true)).items() -%}
-    alias {{alias}}='{{command}}'
+alias {{alias}}='{{command}}'
+{% endfor %}
+
+{% for alias, command in (shell_aliases_custom | default({}, true)).items() -%}
+alias {{alias}}='{{command}}'
 {% endfor %}
 
 # Bash specific aliases
 {% for alias, command in (bash_aliases | default({}, true)).items() -%}
-    alias {{alias}}='{{command}}'
+alias {{alias}}='{{command}}'
 {% endfor %}
 
 # Custom Bash Aliases

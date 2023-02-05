@@ -1,11 +1,15 @@
 # Aliases in all shells
 {% for alias, command in (shell_aliases | default({}, true)).items() -%}
-    alias {{alias}}='{{command}}'
+alias {{alias}}='{{command}}'
+{% endfor %}
+
+{% for alias, command in (shell_aliases_custom | default({}, true)).items() -%}
+alias {{alias}}='{{command}}'
 {% endfor %}
 
 # Fish specific aliases
 {% for alias, command in (fish_aliases | default({}, true)).items() -%}
-    alias {{alias}}='{{command}}'
+alias {{alias}}='{{command}}'
 {% endfor %}
 
 # Custom Fish Aliases

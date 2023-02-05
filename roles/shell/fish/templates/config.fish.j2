@@ -3,13 +3,13 @@ set fish_greeting
 set VIRTUAL_ENV_DISABLE_PROMPT "1"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
-fish_add_path /usr/local/go/bin
-fish_add_path $HOME/.local/bin
+{% for path in shell_paths %}
+fish_add_path {{ path }}
+{% endfor %}
 
-{% if hostvars[inventory_hostname].ansible_distribution == "MacOSX" %}
-fish_add_path /opt/homebrew/bin
-fish_add_path $HOME/Library/Python/3.9/bin
-{% endif %}
+{% for path in shell_paths_custom %}
+fish_add_path {{ path }}
+{% endfor %}
 
 ## Starship prompt
 if status --is-interactive

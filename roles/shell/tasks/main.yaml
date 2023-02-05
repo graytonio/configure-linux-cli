@@ -5,3 +5,29 @@
 - name: Setup Bash
   ansible.builtin.import_role:
     name: shell/bash
+
+- name: Setup ZSH
+  ansible.builtin.import_role:
+    name: shell/zsh
+
+# TODO Move setting default shell to this task with configurable setting
+- name: Set Fish Shell as Default for User
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: "{{ fish_location }}"
+  when: default_shell == "fish"
+
+- name: Set Bash Shell as Default for User
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: "{{ bash_location }}"
+  when: default_shell == "bash"
+
+- name: Set ZSH Shell as Default for User
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: "{{ zsh_location }}"
+  when: default_shell == "zsh"
