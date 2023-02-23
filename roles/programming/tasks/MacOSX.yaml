@@ -6,6 +6,20 @@
   ansible.builtin.homebrew:
     name: node
 
-- name: Install Go
-  ansible.builtin.homebrew:
-    name: go
+# TODO Detect architecture
+- name: Install GOLANG
+  become: true
+  block:
+    - name: Delete Old GO Versions
+      file:
+        path: /usr/local/go
+        state: absent
+    - name: Fetch GO Release
+      get_url:
+        url: "https://golang.org/dl/go{{ go_version }}.darwin-arm64.tar.gz"
+        dest: "/tmp/go.tar.gz"
+    - name: Unpack GO
+      unarchive:
+        src: "/tmp/go.tar.gz"
+        dest: /usr/local
+        remote_src: true
