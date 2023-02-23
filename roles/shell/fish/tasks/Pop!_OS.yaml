@@ -3,9 +3,3 @@
   ansible.builtin.apt:
     pkg:
       - fish
-
-- name: Install Config Dependencies
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      - exa

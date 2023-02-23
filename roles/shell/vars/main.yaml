@@ -8,6 +8,7 @@ shell_paths:
   - $HOME/Library/Python/3.8/bin
   - $HOME/.krew/bin
   - $HOME/Library
+  - $HOME/.cargo/bin
 
 shell_aliases:
   ls: exa -al --color=always --group-directories-first --icons
@@ -27,6 +28,7 @@ shell_aliases:
   kc: kubectl
   wkc: watch kubectl
   kcfc: kubectl delete pods --grace-period=0 --force
+  vim: nvim
 
 # Bash Specific Config
 bash_aliases:

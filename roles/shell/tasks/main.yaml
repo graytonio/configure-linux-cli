@@ -10,7 +10,9 @@
   ansible.builtin.import_role:
     name: shell/zsh
 
-# TODO Move setting default shell to this task with configurable setting
+- name: OS Specific Tasks
+  ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"
+
 - name: Set Fish Shell as Default for User
   become: true
   ansible.builtin.user:

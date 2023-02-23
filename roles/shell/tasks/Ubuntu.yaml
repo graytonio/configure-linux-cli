@@ -1,0 +1,7 @@
+- name: Install Config Dependencies
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - exa
+      - neovim
+      - tmux

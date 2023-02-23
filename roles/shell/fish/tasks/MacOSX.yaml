@@ -14,13 +14,6 @@
       ansible.builtin.shell: bash /tmp/install-brew < /dev/null
 
 - name: Install Fish MacOSX
-  when: hostvars[inventory_hostname].ansible_distribution == "MacOSX"
   community.general.homebrew:
     name: fish
-    state: present
-
-- name: Install Config Dependencies MacOSX
-  when: hostvars[inventory_hostname].ansible_distribution == "MacOSX"
-  community.general.homebrew:
-    name: exa
     state: present

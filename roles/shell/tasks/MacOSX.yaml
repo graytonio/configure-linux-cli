@@ -1,0 +1,7 @@
+- name: Install Config Dependencies MacOSX
+  community.general.homebrew:
+    name:
+      - exa
+      - neovim
+      - tmux
+    state: present
