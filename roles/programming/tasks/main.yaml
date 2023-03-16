@@ -1,2 +1,0 @@
-- name: OS Specific Tasks
-  ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"

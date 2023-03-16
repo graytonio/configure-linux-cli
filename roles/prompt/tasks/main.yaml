@@ -1,7 +1,0 @@
-- name: Install Fonts
-  ansible.builtin.import_role:
-    name: prompt/fonts
-
-- name: Setup Starship Prompt
-  ansible.builtin.import_role:
-    name: prompt/starship

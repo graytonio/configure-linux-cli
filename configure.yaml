@@ -13,5 +13,4 @@
         verbosity: 1
   roles:
     - shell
-    - prompt
-    - programming
+    - applications

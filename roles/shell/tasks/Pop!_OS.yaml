@@ -3,5 +3,3 @@
   ansible.builtin.apt:
     pkg:
       - exa
-      - neovim
-      - tmux

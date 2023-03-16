@@ -2,6 +2,4 @@
   community.general.homebrew:
     name:
       - exa
-      - neovim
-      - tmux
     state: present
