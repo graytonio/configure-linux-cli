@@ -1,0 +1,8 @@
+- name: Install Dependencies
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - unzip
+
+- name: Reload Font Cache
+  shell: fc-cache -fv

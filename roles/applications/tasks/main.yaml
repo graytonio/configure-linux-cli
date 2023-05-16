@@ -1,0 +1,19 @@
+- name: Setup Starship
+  ansible.builtin.import_role:
+    name: applications/starship
+
+- name: Setup Pyton
+  ansible.builtin.import_role:
+    name: applications/python
+
+- name: Setup Golang
+  ansible.builtin.import_role:
+    name: applications/golang
+
+- name: Setup Tmux
+  ansible.builtin.import_role:
+    name: applications/tmux
+
+# - name: Setup Neovim
+#   ansible.builtin.import_role:
+#     name: applications/neovim

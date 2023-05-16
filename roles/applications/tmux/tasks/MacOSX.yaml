@@ -1,0 +1,3 @@
+- name: Install tmux
+  ansible.builtin.homebrew:
+    name: tmux

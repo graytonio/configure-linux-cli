@@ -1,0 +1,13 @@
+require("graytonw.packer")
+require("graytonw.set")
+require("graytonw.remap")
+
+local function set_cwd()
+    local f = io.open(vim.api.nvim_buf_get_name(0), "r")
+    local ok, err, code = f:read(1)
+    f:close()
+    if code == 21 then
+        vim.cmd("cd" .. vim.api.nvim_buf_get_name(0))
+    end
+end
+set_cwd()

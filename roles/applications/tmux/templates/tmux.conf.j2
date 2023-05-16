@@ -1,0 +1,51 @@
+set-option -g prefix C-Space
+bind C-Space send-prefix
+
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Enable mouse clicks
+set -g mouse on
+
+# Longer history
+set-option -g history-limit 5000
+
+# Windows start at 1
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Renumber windows when closing
+set -g renumber-windows on
+
+# Window Split Binds
+bind-key "|" split-window -h -c "#{pane_current_path}"
+bind-key "\\" split-window -fh -c "#{pane_current_path}"
+
+bind-key "-" split-window -v -c "#{pane_current_path}"
+bind-key "_" split-window -fv -c "#{pane_current_path}"
+
+bind-key "X" kill-session
+
+# Resize Pane
+bind -r C-j resize-pane -D 15
+bind -r C-k resize-pane -U 15
+bind -r C-h resize-pane -L 15
+bind -r C-l resize-pane -R 15
+
+# Plugins
+set -g @plugin 'tmux-plugins/tpm'
+{% for plugin in tmux_plugins %}
+set -g @plugin '{{ plugin }}'
+{% endfor %}
+{% for plugin in tmux_plugins_custom %}
+set -g @plugin '{{ plugin }}'
+{% endfor %}
+
+{% for plugin, conf in tmux_plugins_conf.items() %}
+# Config for {{ plugin }}
+{{ conf }}
+{% if plugin in tmux_plugins_conf_custom %}
+{{ tmux_plugins_conf_custom[plugin] }}
+{% endif %}
+{% endfor %}
+
+run '~/.tmux/plugins/tpm/tpm'

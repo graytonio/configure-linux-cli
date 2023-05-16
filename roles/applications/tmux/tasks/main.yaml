@@ -1,0 +1,20 @@
+- name: OS Specific Tasks
+  ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"
+
+- name: Install tpm
+  block:
+    - name: Ensure target directory exists
+      ansible.builtin.file:
+        path: "{{ [ lookup('ansible.builtin.env', 'HOME'), '.tmux', 'plugins' ] | path_join }}"
+        state: "directory"
+    - name: Clone TPM git repo
+      ansible.builtin.git:
+        repo: "https://github.com/tmux-plugins/tpm"
+        dest: "{{ [ lookup('ansible.builtin.env', 'HOME'), '.tmux', 'plugins', 'tpm' ] | path_join }}"
+
+- name: Template tmux config file
+  ansible.builtin.template:
+    src: tmux.conf.j2
+    dest: ~/.tmux.conf
+
+# TODO Figure out how to auto install

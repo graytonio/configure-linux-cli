@@ -1,0 +1,6 @@
+tmux_plugins:
+  - 'dracula/tmux'
+
+tmux_plugins_conf:
+  dracula/tmux: |
+    set -g @dracula-plugins 'git'
