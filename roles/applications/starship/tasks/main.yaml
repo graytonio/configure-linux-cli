@@ -22,6 +22,7 @@
 
 - name: Check if starship is installed
   ansible.builtin.command: which starship
+  ignore_errors: true
   environment: 
     PATH: "{{ ansible_env.PATH }}"
   register: starship_installed

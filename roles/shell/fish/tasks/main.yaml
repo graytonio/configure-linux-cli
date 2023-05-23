@@ -1,6 +1,12 @@
 - name: OS Specific Tasks
   ansible.builtin.include_tasks: "{{ hostvars[inventory_hostname].ansible_distribution }}.yaml"
 
+- name: Ensure Fish Template Folder Exists
+  ansible.builtin.file:
+    path: ~/.config/fish
+    state: directory
+    mode: '0755'
+
 - name: Template Fish Config
   ansible.builtin.template:
     src: config.fish.j2

@@ -4,5 +4,5 @@
     pkg:
       - unzip
 
-- name: Reload Font Cache
-  shell: fc-cache -fv
+# - name: Reload Font Cache
+#   shell: fc-cache -fv
